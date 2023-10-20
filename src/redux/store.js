@@ -1,12 +1,12 @@
-import { devToolsEnhancer } from '@redux-devtools/extension';
-import { createStore, combineReducers } from 'redux';
+// import { devToolsEnhancer } from '@redux-devtools/extension';
+// import { createStore, combineReducers } from 'redux';
 import { contactFormReducer } from './contactFormReducer';
 import { contactListReducer } from './contactListReducer';
+import { configureStore } from '@reduxjs/toolkit';
 
-const rootReducer = combineReducers({
-  contactForm: contactFormReducer,
-  contactList: contactListReducer,
+export const store = configureStore({
+  reducer: {
+    contactForm: contactFormReducer,
+    contactList: contactListReducer,
+  },
 });
-
-const enhancer = devToolsEnhancer();
-export const store = createStore(rootReducer, enhancer);

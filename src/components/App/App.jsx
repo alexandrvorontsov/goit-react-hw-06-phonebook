@@ -4,15 +4,25 @@ import ContactList from '../ContactList/ContactList';
 import Filter from '../Filter/Filter';
 import { Phonebook, MessageDelete, MessageCreate } from './App.styled';
 import { useDispatch, useSelector } from 'react-redux';
+import {
+  setFilter,
+  setIsCreate,
+  setIsDelete,
+  createContact,
+  deleteContact,
+} from 'redux/contactListReducer';
 
 export default function App() {
   const LS_KEY = 'contacts';
   // const [contacts, setContacts] = useState([]);
-  const [filter, setFilter] = useState('');
-  const [isDelete, setIsDelete] = useState(false);
-  const [isCreate, setIsCreate] = useState(false);
+  // const [filter, setFilter] = useState('');
+  // const [isDelete, setIsDelete] = useState(false);
+  // const [isCreate, setIsCreate] = useState(false);
 
   const contacts = useSelector(state => state.contactList.contactsData);
+  const filter = useSelector(state => state.contactList.filterData);
+  const isDelete = useSelector(state => state.contactList.isDelete);
+  const isCreate = useSelector(state => state.contactList.isCreate);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -26,7 +36,8 @@ export default function App() {
 
   const handleChange = evt => {
     const { value } = evt.currentTarget;
-    setFilter(value);
+    dispatch(setFilter(value));
+    // setFilter(value);
   };
 
   const addContact = value => {
@@ -38,13 +49,15 @@ export default function App() {
       return alert(`${name} is already in contacts`);
     }
 
-    dispatch({ type: 'contactList/addContact', payload: value });
+    dispatch(createContact(value));
     // setContacts(prevTodoList => {
     //   return [...prevTodoList, value];
     // });
-    setIsCreate(true);
+    // setIsCreate(true);
+    dispatch(setIsCreate(true));
     setTimeout(() => {
-      setIsCreate(false);
+      dispatch(setIsCreate(false));
+      // setIsCreate(false);
     }, 1000);
   };
 
@@ -56,13 +69,15 @@ export default function App() {
   };
 
   const handleDelete = elementToRemove => {
-    dispatch({ type: 'contactList/deleteContact', payload: elementToRemove });
+    dispatch(deleteContact(elementToRemove));
     // setContacts(prevContacts =>
     //   prevContacts.filter(contact => contact.id !== elementToRemove)
     // );
-    setIsDelete(true);
+    // setIsDelete(true);
+    dispatch(setIsDelete(true));
     setTimeout(() => {
-      setIsDelete(false);
+      // setIsDelete(false);
+      dispatch(setIsDelete(false));
     }, 1000);
   };
 
