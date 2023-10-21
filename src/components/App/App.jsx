@@ -13,7 +13,7 @@ import {
 } from 'redux/contactListReducer';
 
 export default function App() {
-  const LS_KEY = 'contacts';
+  // const LS_KEY = 'contacts';
   // const [contacts, setContacts] = useState([]);
   // const [filter, setFilter] = useState('');
   // const [isDelete, setIsDelete] = useState(false);
@@ -26,7 +26,7 @@ export default function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const localTodo = localStorage.getItem(LS_KEY || []);
+    // const localTodo = localStorage.getItem(LS_KEY || []);
     // if (localTodo) setContacts(JSON.parse(localTodo));
   }, []);
 
