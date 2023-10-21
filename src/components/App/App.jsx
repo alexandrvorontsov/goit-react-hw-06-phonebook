@@ -20,7 +20,7 @@ export default function App() {
   // const [isCreate, setIsCreate] = useState(false);
 
   const contacts = useSelector(state => state.contactList.contactsData);
-  const filter = useSelector(state => state.contactList.filterData);
+  const contactFilter = useSelector(state => state.contactList.filterData);
   const isDelete = useSelector(state => state.contactList.isDelete);
   const isCreate = useSelector(state => state.contactList.isCreate);
   const dispatch = useDispatch();
@@ -62,7 +62,7 @@ export default function App() {
   };
 
   const handleFilter = () => {
-    const normalizedFilter = filter.toLowerCase();
+    const normalizedFilter = contactFilter.toLowerCase();
     return contacts.filter(prevContacts =>
       prevContacts.name.toLowerCase().includes(normalizedFilter)
     );
@@ -86,7 +86,7 @@ export default function App() {
       <h1>Phonebook</h1>
       <ContactForm addContact={addContact} />
       <h2>Filter</h2>
-      <Filter filter={filter} onChange={handleChange} />
+      <Filter filter={contactFilter} onChange={handleChange} />
       <h2>Contacts</h2>
       <ContactList getContacts={handleFilter()} deleteContact={handleDelete} />
       {isDelete && <MessageDelete>Contact delete successfullly!</MessageDelete>}
