@@ -20,7 +20,7 @@ const contactListSlice = createSlice({
       state.filterData = action.payload;
     },
     setIsDelete(state, action) {
-      state.filterData = action.payload;
+      state.isDelete = action.payload;
     },
     setIsCreate(state, action) {
       state.isCreate = action.payload;
@@ -29,13 +29,13 @@ const contactListSlice = createSlice({
       state.contactsData = [...state.contactsData, action.payload];
     },
     deleteContact(state, action) {
-      //   const deleteContactIndex = state.contactsData.findIndex(
-      //     contact => contact.id === action.payload
-      //   );
-      //   state.contactsData.splice(deleteContactIndex, 1);
-      state.contactsData = state.contactsData.filter(
-        contact => contact.id !== action.payload
+      const deleteContactIndex = state.contactsData.findIndex(
+        contact => contact.id === action.payload
       );
+      state.contactsData.splice(deleteContactIndex, 1);
+      //   state.contactsData = state.contactsData.filter(
+      //     contact => contact.id !== action.payload
+      //   );
     },
   },
 });
